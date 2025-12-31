@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChelaTron 3000 — MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div>
+          <p class="eyebrow">MVP interactivo</p>
+          <h1>ChelaTron 3000</h1>
+          <p class="subtitle">Trivia rápida con sabor a chela y ritmo acelerado.</p>
+        </div>
+        <div class="pill">Modo demo</div>
+      </header>
+
+      <section class="mode-picker">
+        <button class="tab is-active" data-tab="host">Host / Proyector</button>
+        <button class="tab" data-tab="player">Jugador (móvil)</button>
+      </section>
+
+      <main>
+        <section id="host" class="panel is-active">
+          <div class="card">
+            <h2>Configuración del juego</h2>
+            <div class="grid">
+              <label>
+                Tema
+                <input id="topic" type="text" placeholder="Ej: Futbol latinoamericano" />
+              </label>
+              <label>
+                Cantidad de preguntas
+                <input id="question-count" type="number" min="3" max="10" value="5" />
+              </label>
+              <label>
+                Tiempo por pregunta (segundos)
+                <input id="question-time" type="number" min="10" max="45" value="20" />
+              </label>
+              <label class="toggle">
+                <input id="chela-personality" type="checkbox" checked />
+                <span>Personalidad Chela</span>
+              </label>
+            </div>
+            <button id="generate" class="primary">Generar juego</button>
+            <p id="thinking" class="status hidden">La chela está pensando…</p>
+          </div>
+
+          <div id="question-preview" class="card hidden">
+            <div class="card__header">
+              <h2>Preguntas generadas</h2>
+              <div class="actions">
+                <button id="regenerate" class="ghost">Regenerar todo</button>
+                <button id="accept" class="primary">Aceptar juego</button>
+              </div>
+            </div>
+            <div id="question-list" class="question-list"></div>
+          </div>
+
+          <div id="waiting-room" class="card hidden">
+            <div class="card__header">
+              <h2>Sala de espera</h2>
+              <div class="code-box">
+                Código
+                <span id="room-code">----</span>
+              </div>
+            </div>
+            <div class="waiting">
+              <div>
+                <h3>Jugadores conectados</h3>
+                <ul id="player-list" class="player-list"></ul>
+              </div>
+              <div class="chela-bubble" id="chela-message">“Estoy enfriando las preguntas…”</div>
+            </div>
+            <button id="start-game" class="primary">Iniciar partida</button>
+          </div>
+
+          <div id="host-game" class="card hidden">
+            <div class="card__header">
+              <h2>Proyector</h2>
+              <div class="timer" id="host-timer">20</div>
+            </div>
+            <div id="host-question" class="host-question"></div>
+            <div id="host-options" class="options"></div>
+            <div id="host-ranking" class="ranking hidden"></div>
+            <div id="host-feedback" class="feedback"></div>
+            <div class="actions">
+              <button id="next-question" class="primary hidden">Siguiente pregunta</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="player" class="panel">
+          <div id="player-join" class="card">
+            <h2>Unirse a la partida</h2>
+            <label>
+              Código
+              <input id="join-code" type="text" placeholder="Ej: 9K4L" />
+            </label>
+            <label>
+              Nombre
+              <input id="player-name" type="text" placeholder="Tu nombre" />
+            </label>
+            <button id="join-game" class="primary">Entrar</button>
+            <p id="join-error" class="status hidden"></p>
+          </div>
+
+          <div id="player-game" class="card hidden">
+            <div class="card__header">
+              <h2 id="player-question-title">Pregunta 1</h2>
+              <div class="timer" id="player-timer">20</div>
+            </div>
+            <div id="player-question" class="player-question"></div>
+            <div id="player-options" class="options"></div>
+            <div id="player-result" class="player-result"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
